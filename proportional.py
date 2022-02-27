@@ -31,21 +31,21 @@ while True:
 
     if ts.value():
         break
-    if error < 0: #if the error is less than 0 (too far from the car), i made the car speed up. 
+    if error < 0: #if the error is less than 0 (too far from the car), the car speeds up. 
         correction = (abs(float(error)/5))*kp
         if (correction+power) >= 100 or (correction+power) <= -100: #to make sure the code doesn't error out
             correction = 0
 
-    if error > 0: #if the error is more than 0 (too close from the car), i made the car stop. 
+    if error > 0: #if the error is more than 0 (too close from the car), the car stops. 
         correction = -(power)
-    if error == 0: #if the error is equal than 0 (perfect distance from car), i made the car stop. 
+    if error == 0: #if the error is equal than 0 (perfect distance from car), the car stops. 
         correction = -(power)
-    if us.distance_centimeters == 255.0: #the ultrasonic sensor has an error where it reads 255, so i made sure it doesn't glitch out and mess up the algorithm.
+    if us.distance_centimeters == 255.0: #the ultrasonic sensor has an error where it reads 255, so this line makes sure it doesn't glitch out and mess up the algorithm.
         correction = -(power)
 
     print(str(target)+", "+str(us.distance_centimeters)+", "+str(error)+", "+str(correction)) #for debugging, comment out if not needed
-    left_motor.duty_cycle_sp= int(-(power + correction)) #sets the wheel speed (negative because my wheels are backward)
-    right_motor.duty_cycle_sp= int(-(power + correction)) #sets the wheel speed (negative because my wheels are backward)
+    left_motor.duty_cycle_sp= int(-(power + correction)) #sets the wheel speed (negative because my robot's wheels are backward)
+    right_motor.duty_cycle_sp= int(-(power + correction)) #sets the wheel speed (negative because my robot's wheels are backward)
     sleep(0.1)
 left_motor.stop()
 right_motor.stop()
