@@ -34,7 +34,7 @@ while True:
     if error < 0: #if the error is less than 0 (too far from the car), the car speeds up. 
         correction = (abs(float(error)/5))*kp
         if (correction+power) >= 100 or (correction+power) <= -100: #to make sure the code doesn't error out
-            correction = 0
+            correction = -(power)
 
     if error > 0: #if the error is more than 0 (too close from the car), the car stops. 
         correction = -(power)
